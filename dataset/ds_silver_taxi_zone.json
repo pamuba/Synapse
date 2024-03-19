@@ -1,0 +1,22 @@
+{
+	"name": "ds_silver_taxi_zone",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_synapsedl",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "23DE2758-C8CA-458F-9BE0-439E390889EB_27_0-1.parquet",
+				"folderPath": "silver/taxi_zone",
+				"fileSystem": "nyc-taxi-data"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

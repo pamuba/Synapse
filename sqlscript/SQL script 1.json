@@ -1,0 +1,20 @@
+{
+	"name": "SQL script 1",
+	"properties": {
+		"folder": {
+			"name": "Demo"
+		},
+		"content": {
+			"query": "-- This is auto-generated code\nSELECT\n    LocationID,\n    COUNT(1) AS NUM_OF_RECORDS\nFROM\n    OPENROWSET(\n        BULK 'https://marlabsdl.dfs.core.windows.net/nyc-taxi-data/raw/taxi_zone.csv',\n        FORMAT = 'CSV',\n        PARSER_VERSION = '1.0',\n        FIRSTROW = 2\n    ) \n     WITH (\n        LocationID SMALLINT,\n        Borough VARCHAR(15),\n        Zone VARCHAR(50),\n        service_zone VARCHAR(15)\n    )AS [result]\nGROUP BY LocationID\nHAVING COUNT(1) > 1\n\n-- -----------------------------------------------------------------\n\nSELECT\n    Borough,\n    COUNT(1) AS NUM_OF_RECORDS\nFROM\n    OPENROWSET(\n        BULK 'https://marlabsdl.dfs.core.windows.net/nyc-taxi-data/raw/taxi_zone.csv',\n        FORMAT = 'CSV',\n        PARSER_VERSION = '1.0',\n        FIRSTROW = 2\n    ) \n     WITH (\n        LocationID SMALLINT,\n        Borough VARCHAR(15),\n        Zone VARCHAR(50),\n        service_zone VARCHAR(15)\n    )AS [result]\nGROUP BY Borough\nHAVING COUNT(1) > 1\n\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "master",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

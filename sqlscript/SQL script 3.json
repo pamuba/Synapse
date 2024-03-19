@@ -1,0 +1,20 @@
+{
+	"name": "SQL script 3",
+	"properties": {
+		"folder": {
+			"name": "Demo"
+		},
+		"content": {
+			"query": "-- -- This is auto-generated code\n-- SELECT TOP 100\n-- lpep_pickup_datetime,\n-- lpep_DROPOFF_datetime,\n-- DATEDIFF(MINUTE,lpep_pickup_datetime, lpep_DROPOFF_datetime) / 60 as from_hour,\n-- (DATEDIFF(MINUTE,lpep_pickup_datetime, lpep_DROPOFF_datetime) / 60) + 1 as to_hour\n-- FROM\n--     OPENROWSET(\n--         BULK 'https://marlabsdl.dfs.core.windows.net/nyc-taxi-data/raw/trip_data_green_parquet/year=2020/month=01/part-00000-tid-6133789922049958496-2e489315-890a-4453-ae93-a104be9a6f06-106-1-c000.snappy.parquet',\n--         FORMAT = 'PARQUET'\n--     ) AS [result]\n\n\nCREATE DATABASE nyc_taxi_ldw\nGO\n\nALTER DATABASE NYC_TAXI_LDW COLLATE latin1_general_100_bin2_utf8\nGO\n\nUSE NYC_TAXI_LDW\nGO\n\nCREATE EXTERNAL DATA SOURCE nyc_taxi_src\nWITH (\n    LOCATION = 'https://marlabsdl.dfs.core.windows.net/nyc-taxi-data',\n);\n\n\nCREATE EXTERNAL FILE FORMAT csv_file_format\nWITH (\n        FORMAT_TYPE = DELIMITEDTEXT\n        FORMAT_OPTIONS (\n             FIELD_TERMINATOR = ',',\n             STRING_DELIMITER = '\"',\n             FIRST_ROW = 2,\n             USE_TYPE_DEFAULT = FALSE,\n             ENCODING = 'UTF8',\n             PARSER_VERSION = '2.0'\n        )\n    ); \n\n\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "nyc_taxi_ldw",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

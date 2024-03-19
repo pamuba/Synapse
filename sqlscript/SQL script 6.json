@@ -1,0 +1,20 @@
+{
+	"name": "SQL script 6",
+	"properties": {
+		"folder": {
+			"name": "Demo"
+		},
+		"content": {
+			"query": "Part-1\n--Views\n\n--we can use the same data source\n-- 1. Create a parquet file format\n-- 2. Create an external table containing year 2020 data\n\n--CETAS(easy transformation)\n\nPart-2\n--convert\n--Json to parquet\n\nPart-3\n--Stored Procs\n\nPart-4\n--Transformation with Partitioned Files\n\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "nyc_taxi_ldw",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
