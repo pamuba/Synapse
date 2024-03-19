@@ -1,0 +1,21 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"workspaceName": {
+			"value": "marlabs-ws"
+		},
+		"ls_serverless_sql_pool_db_nyc_taxi_ldw_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:marlabs-ws-ondemand.sql.azuresynapse.net,1433;Initial Catalog=nyc_taxi_ldw"
+		},
+		"marlabs-ws-WorkspaceDefaultSqlServer_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:marlabs-ws.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
+		},
+		"ls_synapsedl_properties_typeProperties_url": {
+			"value": "https://marlabsdl.dfs.core.windows.net/"
+		},
+		"marlabs-ws-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"value": "https://marlabsdl.dfs.core.windows.net"
+		}
+	}
+}
