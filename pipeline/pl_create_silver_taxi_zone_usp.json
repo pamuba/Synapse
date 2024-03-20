@@ -53,6 +53,32 @@
 					"referenceName": "ls_serverless_sql_pool_db_nyc_taxi_ldw",
 					"type": "LinkedServiceReference"
 				}
+			},
+			{
+				"name": "Notebook1",
+				"type": "SynapseNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebook": {
+						"referenceName": "2_spark_create_gold_trip_data_green_agg",
+						"type": "NotebookReference"
+					},
+					"snapshot": true,
+					"sparkPool": {
+						"referenceName": "oursparkpool",
+						"type": "BigDataPoolReference"
+					},
+					"executorSize": "Small",
+					"driverSize": "Small"
+				}
 			}
 		],
 		"annotations": [],

@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "40de245c-3001-46ab-bad5-4847d91b6c20"
+				"spark.autotune.trackingId": "13c171c9-8a3f-4468-8768-252fbd40eb73"
 			}
 		},
 		"metadata": {
@@ -92,11 +92,11 @@
 				},
 				"source": [
 					"#Set the folder paths so that it can be used later. \n",
-					"bronze_folder_path = 'abfss://nyc-taxi-data@synapsecoursedl.dfs.core.windows.net/raw'\n",
-					"silver_folder_path = 'abfss://nyc-taxi-data@synapsecoursedl.dfs.core.windows.net/silver'\n",
-					"gold_folder_path = 'abfss://nyc-taxi-data@synapsecoursedl.dfs.core.windows.net/gold'"
+					"bronze_folder_path = 'abfss://nyc-taxi-data@marlabsdl.dfs.core.windows.net/raw'\n",
+					"silver_folder_path = 'abfss://nyc-taxi-data@marlabsdl.dfs.core.windows.net/silver'\n",
+					"gold_folder_path = 'abfss://nyc-taxi-data@marlabsdl.dfs.core.windows.net/gold'"
 				],
-				"execution_count": 1
+				"execution_count": 2
 			},
 			{
 				"cell_type": "code",
@@ -115,7 +115,7 @@
 					"#Set the spark config to be able to get the partitioned columns year and month as strings rather than integers\n",
 					"spark.conf.set(\"spark.sql.sources.partitionColumnTypeInference.enabled\", \"false\")"
 				],
-				"execution_count": 2
+				"execution_count": 3
 			},
 			{
 				"cell_type": "code",
@@ -140,9 +140,9 @@
 					"-- Create database to which we are going to write the data\n",
 					"\n",
 					"CREATE DATABASE IF NOT EXISTS nyc_taxi_ldw_spark\n",
-					"LOCATION 'abfss://nyc-taxi-data@synapsecoursedl.dfs.core.windows.net/gold';"
+					"LOCATION 'abfss://nyc-taxi-data@marlabsdl.dfs.core.windows.net/gold';"
 				],
-				"execution_count": 3
+				"execution_count": 4
 			},
 			{
 				"cell_type": "code",
@@ -161,7 +161,7 @@
 					"# Read the silver data to be processed. \n",
 					"trip_data_green_df = spark.read.parquet(f\"{silver_folder_path}/trip_data_green\") "
 				],
-				"execution_count": 4
+				"execution_count": 5
 			},
 			{
 				"cell_type": "code",
@@ -187,7 +187,7 @@
 					"                        .agg(count(lit(1)).alias(\"total_trip_count\"),\n",
 					"                        round(sum(\"fare_amount\"), 2).alias(\"total_fare_amount\"))"
 				],
-				"execution_count": 5
+				"execution_count": 6
 			},
 			{
 				"cell_type": "code",
