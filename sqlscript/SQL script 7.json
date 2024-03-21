@@ -1,0 +1,17 @@
+{
+	"name": "SQL script 7",
+	"properties": {
+		"content": {
+			"query": "create SCHEMA staging\nGO\nIF NOT EXISTS (SELECT * FROM sys.external_file_formats WHERE name = 'SynapseParquetFormat') \n\tCREATE EXTERNAL FILE FORMAT [SynapseParquetFormat] \n\tWITH ( FORMAT_TYPE = PARQUET)\nGO\n\nIF NOT EXISTS (SELECT * FROM sys.external_data_sources WHERE name = 'nyc-taxi-data_marlabsdl_dfs_core_windows_net') \n\tCREATE EXTERNAL DATA SOURCE [nyc-taxi-data_marlabsdl_dfs_core_windows_net] \n\tWITH (\n\t\tLOCATION = 'abfss://nyc-taxi-data@marlabsdl.dfs.core.windows.net' \n\t)\nGO\n\nCREATE EXTERNAL TABLE staging.trip_data_dw (\n\t[year] nvarchar(4000),\n\t[month] nvarchar(4000),\n\t[borough] nvarchar(4000),\n\t[trip_date] date,\n\t[trip_day] nvarchar(4000),\n\t[trip_day_weekend_ind] nvarchar(4000),\n\t[card_trip_count] int,\n\t[cash_trip_count] int,\n\t[street_hail_trip_count] int,\n\t[dispatch_trip_count] int,\n\t[trip_distance] float,\n\t[trip_duration] int,\n\t[fare_amount] float\n\t)\n\tWITH (\n\tLOCATION = 'gold/trip_data_green',\n\tDATA_SOURCE = [nyc-taxi-data_marlabsdl_dfs_core_windows_net],\n\tFILE_FORMAT = [SynapseParquetFormat]\n\t)\nGO\n\n\nSELECT TOP 100 * FROM staging.trip_data_dw\nGO",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "nyc_taxi_dw",
+				"poolName": "nyc_taxi_dw"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
